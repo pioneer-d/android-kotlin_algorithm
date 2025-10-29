@@ -1,6 +1,7 @@
 package com.pioneer.algorithm.basic
 
 import kotlin.math.abs
+import kotlin.math.ceil
 import kotlin.math.min
 import kotlin.math.round
 
@@ -90,8 +91,9 @@ fun solution40(my_string: String, queries: Array<IntArray>): String {
     var answer = StringBuilder(my_string)
 
     repeat(queries.size){ it ->
-        val roundValue = round((queries[it][1].toFloat() - queries[it][0].toFloat()) / 2).toInt()
-        repeat(if (roundValue == 0) 1 else roundValue){ i ->
+        val ceilValue = ceil((queries[it][1].toFloat() - queries[it][0].toFloat()) / 2).toInt()
+        println("횟수 : $ceilValue")
+        repeat(ceilValue){ i ->
             val temp1 = answer[queries[it][1] - i]
             val temp2 = answer[queries[it][0] + i]
             answer[queries[it][0] + i] = temp1
@@ -101,3 +103,5 @@ fun solution40(my_string: String, queries: Array<IntArray>): String {
 
     return answer.toString()
 }
+
+// 1,  4,  2,  2
