@@ -5,7 +5,6 @@ import kotlin.math.ceil
 import kotlin.math.min
 import kotlin.math.round
 
-/** solution40번 아직 통과 못함  */
 fun main(){
 //    println(solution36(true, false, false, false))
 //    println(solution37(6, 4, 2, 5))
