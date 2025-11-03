@@ -26,7 +26,6 @@ fun main(){
 //    }
 }
 
-/** 아직 완료 X */
 /** 리스트 자르기 */
 fun solution56(n: Int, slicer: IntArray, num_list: IntArray): List<Int> {
     val returnList = mutableListOf<Int>()
