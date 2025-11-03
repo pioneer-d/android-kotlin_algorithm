@@ -31,7 +31,7 @@ fun main(){
 fun solution56(n: Int, slicer: IntArray, num_list: IntArray): List<Int> {
     val returnList = mutableListOf<Int>()
     val startPoint = if (n == 1) 0 else slicer[0]
-    val endPoint = if (n == 2) slicer.size-1 else slicer[1]
+    val endPoint = if (n == 2) num_list.size-1 else slicer[1]
     val stepPoint = if (n == 4) slicer[2] else 1
 
     for (i in startPoint .. endPoint step stepPoint){
