@@ -8,6 +8,7 @@ fun main(){
     }
 }
 
+/** 달리기 경주 */
 fun runningRace(players: Array<String>, callings: Array<String>): List<String> {
     val keyIsName = mutableMapOf<String, Int>()
     for (i in 0 until players.size){

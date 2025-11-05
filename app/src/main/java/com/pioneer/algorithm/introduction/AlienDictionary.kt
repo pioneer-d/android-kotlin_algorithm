@@ -1,10 +1,11 @@
 package com.pioneer.algorithm.introduction
 
 fun main(){
-    print(solution(arrayOf("s", "o", "m", "d"), arrayOf("moos", "dzx", "smm", "sunmmo", "som")))
+    print(alienDictionary(arrayOf("s", "o", "m", "d"), arrayOf("moos", "dzx", "smm", "sunmmo", "som")))
 }
 
-fun solution(spell: Array<String>, dic: Array<String>): Int {
+/** 외계어 사전 */
+fun alienDictionary(spell: Array<String>, dic: Array<String>): Int {
     // dic의 개수만큼 순회
         // 하나의 단어 길이만큼 순회
             // Spell 개수 만큼 순회

@@ -4,6 +4,7 @@ fun main(){
     println(nextNum(intArrayOf(1, 2, 3, 4)))
 }
 
+/** 다음에 올 숫자 */
 fun nextNum(common: IntArray): Int {
     var temp1 = common[1] - common[0]
     var temp2 = common[2] - common[1]

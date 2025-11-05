@@ -4,6 +4,7 @@ fun main(){
     println(chickenCoupon(100))
 }
 
+/** 치킨 쿠폰 */
 fun chickenCoupon(chicken: Int): Int {
     /**
      * 1081 / 10 -> 108
