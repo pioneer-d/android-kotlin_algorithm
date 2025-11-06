@@ -29,7 +29,7 @@ fun craneClawMachine(board: Array<IntArray>, moves: IntArray): Int {
 //                        }
 //                    }
 //                } else {
-//                    basketList.add(boardList[b][moves[m]-1])
+//                    basketList.add(targetClaw)
 //                }
 //                boardList[b][moves[m]-1] = 0
 //                break
@@ -41,26 +41,20 @@ fun craneClawMachine(board: Array<IntArray>, moves: IntArray): Int {
 
     /** 2번째 방법 */
     var answer = 0
-    val boardList = board.toMutableList()
     val basketStack = Stack<Int>()
 
     for (m in 0 until moves.size){
         for (b in 0 until board.size){
-            val targetClaw = boardList[b][moves[m]-1]
+            val targetClaw = board[b][moves[m]-1]
             if (targetClaw != 0) {
                 if (basketStack.isNotEmpty() && basketStack.peek() == targetClaw){
                     basketStack.pop()
                     answer += 2
-                    if (basketStack.size > 2){
-                        while (basketStack.last() == basketStack[basketStack.size-1]){
-                            basketStack.pop()
-                            answer += 2
-                        }
-                    }
+
                 } else {
-                    basketStack.add(boardList[b][moves[m]-1])
+                    basketStack.push(targetClaw)
                 }
-                boardList[b][moves[m]-1] = 0
+                board[b][moves[m]-1] = 0
                 break
             }
         }
