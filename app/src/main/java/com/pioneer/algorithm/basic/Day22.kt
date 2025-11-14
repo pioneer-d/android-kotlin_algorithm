@@ -20,65 +20,31 @@ fun solution106(n_str: String): String {
 /** 두 수의 합 */
 fun solution107(a: String, b: String): String {
     var answer = ""
-//    val repeatCount = if (a.length < b.length) a.length else b.length
-//    var isUp = false
-//    repeat(repeatCount){
-//        var calNum = a[it].digitToInt() + b[it].digitToInt() + if (isUp) 1 else 0
-//        isUp = false
-//        if (calNum > 10){
-//            calNum -= 10
-//            isUp = true
-//        }
-//        answer = "$calNum"+answer
-//    }
-//    if ((a.length - b.length).absoluteValue > 0){
-//        when{
-//            a.length > b.length -> {
-//                for (i in b.length until a.length){
-//                    var calNum = a[i].digitToInt() + if (isUp) 1 else 0
-//                    isUp = false
-//                    if (calNum > 10){
-//                        calNum -= 10
-//                        isUp = true
-//                    }
-//                    answer = "$calNum"+answer
-//                }
-//            }
-//            else -> {
-//                for (i in a.length until b.length){
-//                    var calNum = b[i].digitToInt() + if (isUp) 1 else 0
-//                    isUp = false
-//                    if (calNum > 10){
-//                        calNum -= 10
-//                        isUp = true
-//                    }
-//                    answer = "$calNum"+answer
-//                }
-//            }
-//        }
-//    }
-//    if (isUp) answer = "1"+answer
-    // Int -> 2,147,483,647
 
-    var isUp = false
-    var aCount = a
-    var bCount = b
-    if (a.toIntOrNull() != null && b.toIntOrNull() != null){
+    // 1. 둘다 9자리 이하면 toInt()
+    if (a.length < 10 && b.length < 10){
         answer = (a.toInt() + b.toInt()).toString()
     } else {
-        while (aCount.length > 9 || bCount.length > 9){
-            var calNum = aCount.dropLast(9).toInt() + bCount.dropLast(9).toInt() + if (isUp) 1 else 0
-            if (calNum.toString().length > 9){
+        // 2. 긴 것을 기준으로 반복
+        val repeatCount = if (a.length > b.length) a.length else b.length
+        var isUp = false
+        val reversA = a.reversed()
+        val reversB = b.reversed()
+        repeat(repeatCount){
+            val aNum = if (reversA.length-1 >= it) reversA[it].digitToInt() else null
+            val bNum = if (reversB.length-1 >= it) reversB[it].digitToInt() else null
+            var calNum = (aNum ?: 0)+(bNum ?: 0) + if (isUp) + 1 else 0
+            if (calNum >= 10){
+                calNum -= 10
                 isUp = true
-            }
+            } else isUp = false
             answer = "$calNum"+answer
-            aCount = aCount.substring(0, aCount.length - 9)
-            bCount = bCount.substring(0, bCount.length - 9)
         }
+        if (isUp) answer = "1$answer"
     }
-
-    if (isUp) "1"+answer
     return answer
+    // 다른 풀이...
+    // return (a.toBigDecimal() + b.toBigDecimal()).toString()
 }
 
 /** 문자열로 변환 */
