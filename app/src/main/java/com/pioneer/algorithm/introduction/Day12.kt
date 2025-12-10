@@ -13,11 +13,15 @@ fun main(){
 //        }
 //    }
 //    println(iSolution47("aAb1B2cC34oOp"))
-    iSolution48(2).apply {
+    iSolution48(420).apply {
         repeat(this.size){
             print("${this[it]} ")
         }
     }
+//    for (n in 2..10000) {
+//        val result = iSolution48(n).joinToString(", ", "[", "]")
+//        println("Input : $n / Output : $result")
+//    }
 }
 
 /** 모음 제거 */
@@ -63,47 +67,69 @@ fun iSolution47(my_string: String): Int {
 
 /** 소인수분해 */
 fun iSolution48(n: Int): IntArray {
-    if (n == 2) return intArrayOf(2)
+//    12 -> 2,3
+//    17 -> 17
+//    420 -> 2,3,5,7
+
+    val unitSet = mutableSetOf(n)
+
     var breakPoint = true
-    var innerBreak = false
-    var startPoint = 0
-    val unitList = mutableListOf(n)
     while (breakPoint){
-        for (i in startPoint until unitList.size){
-            println("${unitList[i]} 차례")
-            for (l in 2 .. unitList[i]-1){
-                if (l == 2 && unitList[i] == 2) continue
-                println("${unitList[i]} 를 $l 로 나눴을 때")
-                if (unitList[i] % l == 0){
-                    println("약수 발견 : $l")
-                    unitList.add(unitList[i] / l)
-                    unitList.add(l)
-                    unitList.apply {
-                        repeat(this.size){
-                            println("추가 후 list[$it] : ${unitList[it]}")
-                        }
-                    }
-                    unitList.removeAt(i)
-                    unitList.apply {
-                        repeat(this.size){
-                            println("제거 후 list[$it] : ${unitList[it]}")
-                        }
-                    }
-                    startPoint = i
-                    innerBreak = true
-                    break
+        val removeTarget = mutableSetOf<Int>()
+        for (unit in unitSet){
+            val beforeUnitSetSize = unitSet.size
+            for (i in 2 .. unit-1){
+                if (unit % i == 0){
+                    removeTarget.add(unit)
+                    unitSet.add(i)
+                    unitSet.add(unit / i)
                 }
-                if (l == unitList[i]-1) breakPoint = false
             }
-            if (innerBreak) {
-                innerBreak = false
-                break
-            }
+
+            val afterUnitSetSize = unitSet.size
+            if (beforeUnitSetSize == afterUnitSetSize) breakPoint = false
+        }
+        for (target in removeTarget){
+            unitSet.remove(target)
         }
     }
-    val answerSet = mutableSetOf<Int>()
-    repeat(unitList.size){
-        answerSet.add(unitList[it])
-    }
-    return answerSet.toIntArray().sortedArray()
+
+    return unitSet.sorted().toIntArray()
+
+
+//    if (n > 1 && (n and (n - 1)) == 0) return intArrayOf(2) // 비트 연산
+//    var breakPoint = true
+//    var innerBreak = false
+//    var startPoint = 0
+//    val unitList = mutableListOf(n)
+//    while (breakPoint){
+//        for (i in startPoint until unitList.size){
+//            println("${unitList[i]} 차례")
+//            for (l in 2 .. unitList[i]-1){
+//                if (unitList[i] % l == 0){
+//                    println("$l 로 나눠지는 경우")
+//                    unitList.add(l)
+//                    println("$l 추가")
+////                    if (l != unitList[i] / l)
+//                    unitList.add(unitList[i] / l)
+//                    println("${unitList[i] / l} 추가")
+//                    unitList.removeAt(i)
+//                    println("${unitList[i]} 제거")
+//                    startPoint = i
+//                    innerBreak = true
+//                    break
+//                }
+//                if (l == unitList[i]-1) breakPoint = false
+//            }
+//            if (innerBreak) {
+//                innerBreak = false
+//                break
+//            }
+//        }
+//    }
+//    val answerSet = mutableSetOf<Int>()
+//    repeat(unitList.size){
+//        answerSet.add(unitList[it])
+//    }
+//    return answerSet.toIntArray().sortedArray()
 }
